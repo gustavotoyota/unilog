@@ -1,13 +1,15 @@
-# UniLogr: the Universal Logger
+# UniLogr: a Universal Logger
 
 [![Version npm](https://img.shields.io/npm/v/unilogr.svg?logo=npm)](https://www.npmjs.com/package/unilogr)
 
 UniLogr is a logger for both Node.js and Browser based on Winston.
-It's simple, but powerful.
+It's simple, but very powerful.
+
+## Motivation
 
 ## Usage
 
-A logger is constructed with a sequence of operations.
+A logger is constructed from a sequence of operations.
 `writeTo` is used to write a log to an output stream.
 
 ### Creating a logger
@@ -41,7 +43,7 @@ const logger = new Logger([
 logger.info('Test'); // 2022-11-01 19:11:47 [INFO]: Test (+0ms)
 ```
 
-### Logging methods
+### Logging levels
 
 UnoLogr uses the following logging levels:
 
@@ -51,6 +53,21 @@ logger.warn('Warn');
 logger.info('Info');
 logger.debug('Debug');
 logger.verbose('Verbose');
+```
+
+### Info object
+
+The `info` object is a plain JavaScript object that contains at least the following fields:
+
+```js
+const info = {
+  level: 'info', // Customizable level field
+  message: 'Example', // Customizable message field
+
+  [LEVEL_SYMBOL]: 'info', // Read-only log level
+  [OUTPUT_SYMBOL]: '[INFO]: Example', // String that will be written to the output
+  [SPLAT_SYMBOL]: [], // Arguments for messages containing %s, %o, etc.
+};
 ```
 
 ### Filtering logs
@@ -67,6 +84,17 @@ const logger = new Logger([
 logger.info('Server started.', { ctx: 'Startup' }); // Discarded
 
 logger.info('Refreshing tokens...', { ctx: 'Auth' }); // Accepted
+```
+
+Logs can be filtered by level by using the `discardLessSevereThan()` operation:
+
+```js
+const logger = new Logger([
+  discardLessSevereThan('warn'), // Discard logs with level less severe than 'warn'
+  // Same as: (info) => levels[info[LEVEL_SYMBOL]] <= levels['warn']
+
+  // ...
+]);
 ```
 
 ### Extending a logger
