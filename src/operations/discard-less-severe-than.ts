@@ -15,6 +15,6 @@ export const discardLessSevereThan =
     }
 
     if (levels[info[LEVEL_SYMBOL]] > levels[level]) {
-      return null;
+      return false;
     }
   };

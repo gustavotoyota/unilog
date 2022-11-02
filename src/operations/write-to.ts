@@ -6,8 +6,8 @@ export const writeTo = (stream: LogStream): LogOperation =>
   function (this: LogExtensions, info) {
     const result = executeOperations(info, stream.operations, this);
 
-    if (result === null) {
-      return null;
+    if (result === false) {
+      return false;
     }
 
     stream.write?.(result);

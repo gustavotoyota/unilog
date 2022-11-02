@@ -10,7 +10,7 @@ export function executeOperations(
   info: LogInfo,
   operations: LogOperation[],
   extensions: LogExtensions,
-) {
+): LogInfo | false {
   const checkedSlots = new Set<string>();
 
   for (const operation of operations) {
@@ -32,8 +32,8 @@ export function executeOperations(
       );
     }
 
-    if (result === null) {
-      return null;
+    if (result === false) {
+      return false;
     }
 
     if (typeof result === 'string') {
