@@ -2,7 +2,7 @@ import type { LogInfo } from './info';
 import type { LogLevel } from './levels';
 import { addContext } from './operations';
 import type { LogExtensions, LogOperation } from './operations/operation';
-import { FINAL_MESSAGE_SYMBOL, LEVEL_SYMBOL, SPLAT_SYMBOL } from './symbols';
+import { LEVEL_SYMBOL, OUTPUT_SYMBOL, SPLAT_SYMBOL } from './symbols';
 import { executeOperations } from './utils';
 
 export interface LoggerOptions {
@@ -53,7 +53,7 @@ export class Logger {
       message,
 
       [LEVEL_SYMBOL]: level,
-      [FINAL_MESSAGE_SYMBOL]: message,
+      [OUTPUT_SYMBOL]: message,
       [SPLAT_SYMBOL]: [],
     };
 

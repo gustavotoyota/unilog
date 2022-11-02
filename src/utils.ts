@@ -4,7 +4,7 @@ import type {
   LogOperation,
   LogOperationResult,
 } from './operations/operation';
-import { FINAL_MESSAGE_SYMBOL } from './symbols';
+import { OUTPUT_SYMBOL } from './symbols';
 
 export function executeOperations(
   info: LogInfo,
@@ -37,7 +37,7 @@ export function executeOperations(
     }
 
     if (typeof result === 'string') {
-      info[FINAL_MESSAGE_SYMBOL] = result;
+      info[OUTPUT_SYMBOL] = result;
     } else if (typeof result === 'object') {
       info = result;
     }
