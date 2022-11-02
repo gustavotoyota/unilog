@@ -19,7 +19,19 @@
     "typescript": "4.8.4",
     "unbuild": "^0.9.4"
   },
-  "keywords": [],
+  "keywords": [
+    "unilogr",
+    "log",
+    "logs",
+    "logger",
+    "logging",
+    "debug",
+    "universal",
+    "node",
+    "browser",
+    "winston",
+    "loglevel"
+  ],
   "license": "ISC",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
