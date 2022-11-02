@@ -25,17 +25,17 @@ import {
 import { ConsoleOutput } from 'unilogr/outputs';
 
 const logger = new Logger([
-  capitalizeField('level'),
-  colorizeField('level'),
-  addTimestamp(),
-  addMilliseconds(),
+  capitalizeField('level'), // Capitalize the "level" field
+  colorizeField('level'), // Colorize the "level" field according to severity
+  addTimestamp(), // Add the "timestamp" field
+  addInterval(), // Add the "interval" field
 
-  markExtensionSlot(),
+  markExtensionSlot(), // Mark this spot for extensions
 
-  ({ timestamp, level, message, ctx, ms }) =>
-    `${timestamp} [${level}]${ctx ? ` (${ctx})` : ''}: ${message} (${ms})`,
+  ({ timestamp, level, message, interval }) =>
+    `${timestamp} [${level}]: ${message} (${interval})`, // Format message
 
-  writeTo(new ConsoleOutput()),
+  writeTo(new ConsoleOutput()), // Write formatted message to console
 ]);
 
 logger.info('Test'); // 2022-11-01 19:11:47 [INFO]: Test (+0ms)
@@ -52,8 +52,6 @@ logger.info('Info');
 logger.debug('Debug');
 logger.verbose('Verbose');
 ```
-
-### Logging
 
 ### Filtering logs
 
@@ -74,7 +72,7 @@ logger.info('Refreshing tokens...', { ctx: 'Auth' }); // Accepted
 ### Extending a logger
 
 A logger can be extended with more operations.
-Operations can be added in slots marked by `markExtensionSlot()`.
+Operations can be inserted in slots marked by `markExtensionSlot()`.
 
 ```js
 const mainLogger = new Logger([
@@ -92,6 +90,8 @@ const subLogger = mainLogger.extend([addContext('Sub context')]);
 
 subLogger.info('Sub logger test'); // 2029-05-02 11:18:41 (Main context > Sub context): Sub logger test
 ```
+
+The utility function `.sub(context)`
 
 You can create and extend multiple slots by giving them different names.
 
@@ -113,3 +113,7 @@ const subLogger = mainLogger.extend({
   slot2: [writeTo(new FileOutput('logs.txt'))],
 });
 ```
+
+## License
+
+MIT
