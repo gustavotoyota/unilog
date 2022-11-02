@@ -1,5 +1,5 @@
 export * from './add-context';
-export * from './add-milliseconds';
+export * from './add-interval';
 export * from './add-timestamp';
 export * from './capitalize-field';
 export * from './colorize-field';

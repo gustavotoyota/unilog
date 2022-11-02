@@ -15,7 +15,7 @@ A logger is constructed with a sequence of operations.
 ```js
 import { Logger } from 'unilogr';
 import {
-  addMilliseconds,
+  addInterval,
   addTimestamp,
   capitalizeField,
   colorizeField,
@@ -106,8 +106,8 @@ const mainLogger = new Logger([
 
   markExtensionSlot(), // name: 'defaultSlot'
 
-  ({ timestamp, level, message, ctx, ms }) =>
-    `${timestamp} [${level}]${ctx ? ` (${ctx})` : ''}: ${message} (${ms})`,
+  ({ timestamp, level, message, ctx }) =>
+    `${timestamp} [${level}]${ctx ? ` (${ctx})` : ''}: ${message}`,
 
   markExtensionSlot('slot2'),
 ]);

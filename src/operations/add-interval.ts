@@ -1,6 +1,6 @@
 import type { LogOperation } from './operation';
 
-export const addMilliseconds = (): LogOperation => {
+export const addInterval = (): LogOperation => {
   let prevTime: number;
 
   return (info) => {
@@ -8,7 +8,7 @@ export const addMilliseconds = (): LogOperation => {
 
     const currTime = Date.now();
 
-    info.ms = `+${currTime - prevTime}ms`;
+    info.interval = `+${currTime - prevTime}ms`;
 
     prevTime = currTime;
   };
