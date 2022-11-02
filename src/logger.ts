@@ -91,7 +91,7 @@ export class Logger {
     return new Logger({ baseLogger: this, extensions });
   }
 
-  addCtx(context: string) {
+  sub(context: string) {
     return this.extend([addContext(context)]);
   }
 }
