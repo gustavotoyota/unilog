@@ -1,5 +1,5 @@
 import type { LogLevel } from './levels';
-import type { OUTPUT_SYMBOL, LEVEL_SYMBOL, SPLAT_SYMBOL } from './symbols';
+import type { ARGS_SYMBOL, LEVEL_SYMBOL, OUTPUT_SYMBOL } from './symbols';
 
 export interface LogInfo {
   level: string;
@@ -7,7 +7,7 @@ export interface LogInfo {
 
   [LEVEL_SYMBOL]: LogLevel;
   [OUTPUT_SYMBOL]: any;
-  [SPLAT_SYMBOL]: any[];
+  [ARGS_SYMBOL]: any[];
 
   [key: string | symbol]: any;
 }

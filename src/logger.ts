@@ -2,7 +2,7 @@ import type { LogInfo } from './info';
 import type { LogLevel } from './levels';
 import { addContext } from './operations';
 import type { LogExtensions, LogOperation } from './operations/operation';
-import { LEVEL_SYMBOL, OUTPUT_SYMBOL, SPLAT_SYMBOL } from './symbols';
+import { ARGS_SYMBOL, LEVEL_SYMBOL, OUTPUT_SYMBOL } from './symbols';
 import { executeOperations } from './utils';
 
 export interface LoggerOptions {
@@ -54,13 +54,17 @@ export class Logger {
 
       [LEVEL_SYMBOL]: level,
       [OUTPUT_SYMBOL]: message,
-      [SPLAT_SYMBOL]: [],
+      [ARGS_SYMBOL]: [],
     };
 
-    const splatLen = String(message).match(/%\w/g)?.length ?? 0;
-    info[SPLAT_SYMBOL] = args.slice(0, splatLen);
+    // Collect arguments
 
-    for (let i = splatLen; i < args.length; i++) {
+    const argsLen = String(message).match(/%\w/g)?.length ?? 0;
+    info[ARGS_SYMBOL] = args.slice(0, argsLen);
+
+    // Merge remaining arguments into info
+
+    for (let i = argsLen; i < args.length; i++) {
       Object.assign(info, args[i]);
     }
 

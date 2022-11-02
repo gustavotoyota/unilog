@@ -1,7 +1,7 @@
 import { escapeColorToCSS } from '../colors';
 import type { LogInfo } from '../info';
 import { LogStream } from '../stream';
-import { OUTPUT_SYMBOL, LEVEL_SYMBOL, SPLAT_SYMBOL } from '../symbols';
+import { ARGS_SYMBOL, LEVEL_SYMBOL, OUTPUT_SYMBOL } from '../symbols';
 
 export class ConsoleOutput extends LogStream {
   override write(info: LogInfo) {
@@ -21,33 +21,29 @@ export class ConsoleOutput extends LogStream {
       );
 
       let colorIndex = 0;
-      let splatIndex = 0;
+      let argIndex = 0;
 
       info[OUTPUT_SYMBOL] = info[OUTPUT_SYMBOL].replaceAll(/%\w/g, (match) => {
         if (match === '%c') {
           const escapeColor = escapeColors[colorIndex++];
 
-          info[SPLAT_SYMBOL].splice(
-            splatIndex,
-            0,
-            escapeColorToCSS[escapeColor],
-          );
+          info[ARGS_SYMBOL].splice(argIndex, 0, escapeColorToCSS[escapeColor]);
         }
 
-        splatIndex++;
+        argIndex++;
 
         return match;
       });
     }
 
     if (info[LEVEL_SYMBOL] === 'error') {
-      console.error(info[OUTPUT_SYMBOL], ...info[SPLAT_SYMBOL]);
+      console.error(info[OUTPUT_SYMBOL], ...info[ARGS_SYMBOL]);
     } else if (info[LEVEL_SYMBOL] === 'warn') {
-      console.warn(info[OUTPUT_SYMBOL], ...info[SPLAT_SYMBOL]);
+      console.warn(info[OUTPUT_SYMBOL], ...info[ARGS_SYMBOL]);
     } else if (info[LEVEL_SYMBOL] === 'info') {
-      console.info(info[OUTPUT_SYMBOL], ...info[SPLAT_SYMBOL]);
+      console.info(info[OUTPUT_SYMBOL], ...info[ARGS_SYMBOL]);
     } else {
-      console.debug(info[OUTPUT_SYMBOL], ...info[SPLAT_SYMBOL]);
+      console.debug(info[OUTPUT_SYMBOL], ...info[ARGS_SYMBOL]);
     }
   }
 }
