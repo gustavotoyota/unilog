@@ -91,7 +91,12 @@ const subLogger = mainLogger.extend([addContext('Sub context')]);
 subLogger.info('Sub logger test'); // 2029-05-02 11:18:41 (Main context > Sub context): Sub logger test
 ```
 
-The utility function `.sub(context)`
+The utility function `logger.sub(context)` helps to easily create sub-loggers:
+
+```js
+const subLogger = mainLogger.sub('Sub context');
+// Same as mainLogger.extend([addContext('Sub context')])
+```
 
 You can create and extend multiple slots by giving them different names.
 
