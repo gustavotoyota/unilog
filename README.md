@@ -43,9 +43,9 @@ const logger = new Logger([
 logger.info('Test'); // 2022-11-01 19:11:47 [INFO]: Test (+0ms)
 ```
 
-### Logging levels
+### Log levels
 
-UnoLogr uses the following logging levels:
+UniLogr uses the following log levels:
 
 ```js
 logger.error('Error');
@@ -55,19 +55,36 @@ logger.debug('Debug');
 logger.verbose('Verbose');
 ```
 
-### Info object
+### The Info object
 
 The `info` object is a plain JavaScript object that contains at least the following fields:
 
 ```js
 const info = {
-  level: 'info', // Customizable level field
-  message: 'Example', // Customizable message field
+  level: 'info', // Customizable field (colorize it, capitalize it, etc.)
+  message: 'Example', // Customizable field
 
-  [LEVEL_SYMBOL]: 'info', // Read-only log level
+  [LEVEL_SYMBOL]: 'info', // Read-only field used to determine original log level
   [OUTPUT_SYMBOL]: '[INFO]: Example', // String that will be written to the output
-  [SPLAT_SYMBOL]: [], // Arguments for messages containing %s, %o, etc.
+  [ARGS_SYMBOL]: [], // Arguments for messages containing %s, %d, %o, etc.
 };
+```
+
+### String interpolation
+
+UniLogr supports string interpolation using `%s`, `%d`, `%o`, etc. as placeholders.
+Arguments without corresponding placeholders are merged into the `info` object.
+
+```js
+const logger = new Logger([
+  (info) => {
+    info[OUTPUT_SYMBOL] = `[${info.level}] (${info.ctx}): ${info.message}`;
+  },
+
+  writeTo(new ConsoleOutput()),
+]);
+
+logger.info('Origin is %s', 'http://localhost', { ctx: 'CORS' }); // [info] (CORS): Origin is http://localhost
 ```
 
 ### Filtering logs
