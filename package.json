@@ -49,6 +49,14 @@
     ".": {
       "require": "./dist/index.cjs",
       "import": "./dist/index.mjs"
+    },
+    "./operations": {
+      "require": "./dist/operations/index.cjs",
+      "import": "./dist/operations/index.mjs"
+    },
+    "./outputs": {
+      "require": "./dist/outputs/index.cjs",
+      "import": "./dist/outputs/index.mjs"
     }
   },
   "repository": "https://github.com/gustavotoyota/unilogr.git",
