@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/gustavotoyota/unilogr/compare/v0.0.13...v0.0.14) (2022-11-03)
+
+
+### Bug Fixes
+
+* **package.json:** undo subfolder exports (doesn't work) ([813c3b6](https://github.com/gustavotoyota/unilogr/commit/813c3b64b9b400815305a696e6029ffad52bea3d))
+
 ### [0.0.13](https://github.com/gustavotoyota/unilogr/compare/v0.0.12...v0.0.13) (2022-11-03)
 
 
