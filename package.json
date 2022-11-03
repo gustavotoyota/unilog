@@ -57,6 +57,7 @@
     "clean": "rimraf ./dist *.tsbuildinfo",
     "fix": "eslint --fix --ext .ts ./",
     "npkill": "rimraf ./node_modules",
+    "prepare": "husky install",
     "release": "unbuild && standard-version && git push --follow-tags origin dev && npm publish --access public"
   }
 }
