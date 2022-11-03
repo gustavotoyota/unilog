@@ -17,16 +17,16 @@ A logger is constructed from a sequence of operations.
 ### Creating a logger
 
 ```js
-import { Logger } from 'unilogr';
 import {
   addInterval,
   addTimestamp,
   capitalizeField,
   colorizeField,
+  ConsoleOutput,
+  Logger,
   markExtensionSlot,
   writeTo,
-} from 'unilogr/operations';
-import { ConsoleOutput } from 'unilogr/outputs';
+} from 'unilogr';
 
 const logger = new Logger([
   capitalizeField('level'), // Capitalize the "level" field
