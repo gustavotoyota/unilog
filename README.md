@@ -7,20 +7,32 @@ UniLogr is a logger for both Node.js and Browser based on Winston.
 ## Motivation
 
 This project aims to provide a simple but powerful logger that works on both Node.js and the Browser.
-The logger should be flexible, allowing the user to create sub-loggers and add custom outputs.
+The logger should be flexible and convenient, allowing the user to add custom outputs abd create sub-loggers.
 
 ## Instalation
 
+NPM:
+
 ```bash
 npm install unilogr
+```
+
+Yarn:
+
+```bash
 yarn add unilogr
+```
+
+PNPM:
+
+```bash
 pnpm add unilogr
 ```
 
 ## Usage
 
 A logger is constructed from a sequence of operations that will be executed on each log.
-`writeTo` is used to write a log to an output stream.
+The operation `writeTo` is used to write a log to an output stream.
 
 ### Creating a logger
 
