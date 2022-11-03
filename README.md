@@ -7,7 +7,7 @@ UniLogr is a logger for both Node.js and Browser based on Winston.
 ## Motivation
 
 This project aims to provide a simple but powerful logger that works on both Node.js and the Browser.
-The logger should be flexible and convenient, allowing the user to add custom outputs abd create sub-loggers.
+The logger should be flexible and convenient, allowing the user to add custom outputs and create sub-loggers.
 
 ## Installation
 
