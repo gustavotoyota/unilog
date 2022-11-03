@@ -107,7 +107,7 @@ const logger = new Logger([
 ]);
 
 logger.info('Origin is %s', 'http://localhost', { ctx: 'CORS' });
-// Output: [info] (CORS): Origin is http://localhost
+// [info] (CORS): Origin is http://localhost
 ```
 
 ### Filtering logs
@@ -153,12 +153,12 @@ const mainLogger = new Logger([
 ]);
 
 mainLogger.info('Main logger test');
-// Output: 2029-05-02 11:18:41 (Main context): Main logger test
+// 2029-05-02 11:18:41 (Main context): Main logger test
 
 const subLogger = mainLogger.extend([addContext('Sub context')]);
 
 subLogger.info('Sub logger test');
-// Output: 2029-05-02 11:18:41 (Main context > Sub context): Sub logger test
+// 2029-05-02 11:18:41 (Main context > Sub context): Sub logger test
 ```
 
 The utility function `logger.sub(context)` helps to easily create sub-loggers:
