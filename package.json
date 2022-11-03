@@ -1,7 +1,7 @@
 {
   "name": "unilogr",
   "description": "Modern logger for both Node.js and Browser.",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "author": "Gustavo Toyota",
   "devDependencies": {
     "@commitlint/cli": "^17.2.0",
