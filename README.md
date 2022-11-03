@@ -152,11 +152,13 @@ const mainLogger = new Logger([
     `${timestamp}${ctx ? ` (${ctx})` : ''}: ${message}`,
 ]);
 
-mainLogger.info('Main logger test'); // 2029-05-02 11:18:41 (Main context): Main logger test
+mainLogger.info('Main logger test');
+// Output: 2029-05-02 11:18:41 (Main context): Main logger test
 
 const subLogger = mainLogger.extend([addContext('Sub context')]);
 
-subLogger.info('Sub logger test'); // 2029-05-02 11:18:41 (Main context > Sub context): Sub logger test
+subLogger.info('Sub logger test');
+// Output: 2029-05-02 11:18:41 (Main context > Sub context): Sub logger test
 ```
 
 The utility function `logger.sub(context)` helps to easily create sub-loggers:
