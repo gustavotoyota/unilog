@@ -31,10 +31,10 @@ pnpm add unilogr
 
 ## Usage
 
-A logger is constructed from a sequence of operations that will be executed on each log.
-The operation `writeTo` is used to write a log to an output stream.
-
 ### Creating a logger
+
+A logger is constructed with a sequence of operations that will be executed on each log.
+The operation `writeTo` is used to write a log to an output stream.
 
 ```js
 import {
@@ -86,7 +86,7 @@ const info = {
   level: 'info', // Customizable field (colorize it, capitalize it, etc.)
   message: 'Example', // Customizable field
 
-  [LEVEL_SYMBOL]: 'info', // Read-only field used to determine original log level
+  [LEVEL_SYMBOL]: 'info', // Read-only field used to determine the log level
   [OUTPUT_SYMBOL]: '[INFO]: Example', // String that will be written to the output
   [ARGS_SYMBOL]: [], // Arguments for messages containing %s, %d, %o, etc.
 };
@@ -195,4 +195,4 @@ const subLogger = mainLogger.extend({
 
 ## License
 
-MIT
+MIT License © 2022 Gustavo Toyota
