@@ -51,7 +51,7 @@ module.exports = {
     'no-return-await': 'off',
     '@typescript-eslint/return-await': ['error', 'always'],
 
-    '@typescript-eslint/consistent-type-imports': 'error',
+    '@typescript-eslint/consistent-type-imports': 'off',
 
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
   },
