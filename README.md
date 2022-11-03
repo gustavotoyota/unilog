@@ -3,9 +3,11 @@
 [![Version npm](https://img.shields.io/npm/v/unilogr.svg?logo=npm)](https://www.npmjs.com/package/unilogr)
 
 UniLogr is a logger for both Node.js and Browser based on Winston.
-It's simple, but very powerful.
 
 ## Motivation
+
+This project aims to provide a simple but powerful logger that works on both Node.js and the Browser.
+The logger should be flexible, allowing the user to create sub-loggers and add custom outputs.
 
 ## Usage
 
@@ -84,7 +86,8 @@ const logger = new Logger([
   writeTo(new ConsoleOutput()),
 ]);
 
-logger.info('Origin is %s', 'http://localhost', { ctx: 'CORS' }); // [info] (CORS): Origin is http://localhost
+logger.info('Origin is %s', 'http://localhost', { ctx: 'CORS' });
+// Output: [info] (CORS): Origin is http://localhost
 ```
 
 ### Filtering logs
