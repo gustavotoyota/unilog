@@ -9,9 +9,17 @@ UniLogr is a logger for both Node.js and Browser based on Winston.
 This project aims to provide a simple but powerful logger that works on both Node.js and the Browser.
 The logger should be flexible, allowing the user to create sub-loggers and add custom outputs.
 
+## Instalation
+
+```bash
+npm install unilogr
+yarn add unilogr
+pnpm add unilogr
+```
+
 ## Usage
 
-A logger is constructed from a sequence of operations.
+A logger is constructed from a sequence of operations that will be executed on each log.
 `writeTo` is used to write a log to an output stream.
 
 ### Creating a logger
@@ -106,7 +114,7 @@ logger.info('Server started.', { ctx: 'Startup' }); // Discarded
 logger.info('Refreshing tokens...', { ctx: 'Auth' }); // Accepted
 ```
 
-Logs can be filtered by level by using the `discardLessSevereThan()` operation:
+UniLogr provides the utility function `discardLessSevereThan()` to easily filter logs by level of severity:
 
 ```js
 const logger = new Logger([
@@ -119,8 +127,8 @@ const logger = new Logger([
 
 ### Extending a logger
 
-A logger can be extended with more operations.
-Operations can be inserted in slots marked by `markExtensionSlot()`.
+A logger can be extended by inserting more operations.
+Operations are inserted in slots marked by `markExtensionSlot()`.
 
 ```js
 const mainLogger = new Logger([
@@ -143,6 +151,7 @@ The utility function `logger.sub(context)` helps to easily create sub-loggers:
 
 ```js
 const subLogger = mainLogger.sub('Sub context');
+// Appends the context to the field "ctx" in the info object.
 // Same as mainLogger.extend([addContext('Sub context')])
 ```
 
@@ -151,8 +160,9 @@ You can create and extend multiple slots by giving them different names.
 ```js
 const mainLogger = new Logger([
   // ...
-
   markExtensionSlot(), // name: 'defaultSlot'
+  // ...
+  markExtensionSlot('slot1'),
 
   ({ timestamp, level, message, ctx }) =>
     `${timestamp} [${level}]${ctx ? ` (${ctx})` : ''}: ${message}`,
@@ -162,6 +172,8 @@ const mainLogger = new Logger([
 
 const subLogger = mainLogger.extend({
   defaultSlot: [addContext('server.ts')],
+
+  slot1: [addTimestamp()],
 
   slot2: [writeTo(new FileOutput('logs.txt'))],
 });
