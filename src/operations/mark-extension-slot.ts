@@ -1,6 +1,6 @@
 import type { LogOperation } from './operation';
 
-export function markExtensionSlot(
+export function markSlot(
   slotName: string | LogOperation[] = 'defaultSlot',
   operations: LogOperation[] = [],
 ) {

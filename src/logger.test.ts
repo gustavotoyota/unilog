@@ -1,6 +1,6 @@
 import { levels } from './levels';
 import { Logger } from './logger';
-import { markExtensionSlot, writeTo } from './operations';
+import { markSlot, writeTo } from './operations';
 import { ConsoleOutput } from './outputs';
 import { LEVEL_SYMBOL, OUTPUT_SYMBOL } from './symbols';
 
@@ -110,7 +110,7 @@ describe('Logger', () => {
       let output;
 
       const logger = new Logger([
-        markExtensionSlot('testSlot'),
+        markSlot('testSlot'),
         (info) => `added prefix: ${info.message}`,
         (info) => {
           output = info[OUTPUT_SYMBOL];
@@ -134,7 +134,7 @@ describe('Logger', () => {
         let output;
 
         const logger = new Logger([
-          markExtensionSlot([
+          markSlot([
             (info) => {
               info.message = 'This is a placeholder.';
             },

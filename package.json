@@ -63,8 +63,8 @@
     "fix": "eslint --fix --ext .ts ./",
     "npkill": "rimraf ./node_modules",
     "prepare": "husky install",
-    "release": "unbuild && standard-version && git push --follow-tags origin dev && npm publish --access public",
-    "test": "jest --runInBand",
-    "test:watch": "jest --watch --runInBand"
+    "release": "jest && unbuild && standard-version && git push --follow-tags origin dev && npm publish --access public",
+    "test": "jest",
+    "test:watch": "jest --watch"
   }
 }

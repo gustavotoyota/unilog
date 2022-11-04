@@ -44,7 +44,7 @@ import {
   colorizeField,
   ConsoleOutput,
   Logger,
-  markExtensionSlot,
+  markSlot,
   writeTo,
 } from 'unilogr';
 
@@ -54,7 +54,7 @@ const logger = new Logger([
   addTimestamp(), // Add the "timestamp" field
   addInterval(), // Add the "interval" field
 
-  markExtensionSlot(), // Mark this spot for extensions
+  markSlot(), // Mark this spot for extensions
 
   ({ timestamp, level, message, interval }) =>
     `${timestamp} [${level}]: ${message} (${interval})`, // Format message
@@ -140,13 +140,13 @@ const logger = new Logger([
 ### Extending a logger
 
 A logger can be extended by inserting more operations.
-Operations are inserted in slots marked by `markExtensionSlot()`.
+Operations are inserted in slots marked by `markSlot()`.
 
 ```js
 const mainLogger = new Logger([
   addContext('Main context'),
 
-  markExtensionSlot(), // <<< Extension operations are inserted here
+  markSlot(), // <<< Extension operations are inserted here
 
   ({ timestamp, message, ctx }) =>
     `${timestamp}${ctx ? ` (${ctx})` : ''}: ${message}`,
@@ -174,14 +174,14 @@ You can create and extend multiple slots by giving them different names.
 ```js
 const mainLogger = new Logger([
   // ...
-  markExtensionSlot(), // name: 'defaultSlot'
+  markSlot(), // name: 'defaultSlot'
   // ...
-  markExtensionSlot('slot1'),
+  markSlot('slot1'),
 
   ({ timestamp, level, message, ctx }) =>
     `${timestamp} [${level}]${ctx ? ` (${ctx})` : ''}: ${message}`,
 
-  markExtensionSlot('slot2'),
+  markSlot('slot2'),
 ]);
 
 const subLogger = mainLogger.extend({
