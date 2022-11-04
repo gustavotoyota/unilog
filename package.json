@@ -6,6 +6,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
+    "@commitlint/prompt-cli": "^17.2.0",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
@@ -56,6 +57,7 @@
   "scripts": {
     "build": "unbuild",
     "clean": "rimraf ./dist *.tsbuildinfo",
+    "commit": "commit",
     "fix": "eslint --fix --ext .ts ./",
     "npkill": "rimraf ./node_modules",
     "prepare": "husky install",
