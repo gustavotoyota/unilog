@@ -1,6 +1,6 @@
 import { levels } from './levels';
 import { Logger } from './logger';
-import { writeTo } from './operations';
+import { markExtensionSlot, writeTo } from './operations';
 import { ConsoleOutput } from './outputs';
 import { LEVEL_SYMBOL, OUTPUT_SYMBOL } from './symbols';
 
@@ -9,6 +9,7 @@ import { LEVEL_SYMBOL, OUTPUT_SYMBOL } from './symbols';
 // - Users should be able to specify operations to output streams.
 // - Loggers should be able to write to other loggers.
 // - Logger extensions should be able to decide whether or not to re-export the base slots.
+// - Slots should be able to have placeholders.
 
 describe('Logger', () => {
   describe('Log filtering', () => {
@@ -101,6 +102,57 @@ describe('Logger', () => {
 
       logger.info('original message');
       expect(output).toBe('added prefix: original message');
+    });
+  });
+
+  describe('Extending', () => {
+    it('should be able to be extended', () => {
+      let output;
+
+      const logger = new Logger([
+        markExtensionSlot('testSlot'),
+        (info) => `added prefix: ${info.message}`,
+        (info) => {
+          output = info[OUTPUT_SYMBOL];
+        },
+      ]);
+
+      const subLogger = logger.extend({
+        testSlot: [
+          (info) => {
+            info.test = info.message;
+          },
+        ],
+      });
+
+      subLogger.info('This should be logged.');
+      expect(output).toBe('added prefix: This should be logged.');
+    });
+
+    describe('Slots', () => {
+      it('should be able to have placeholders', () => {
+        let output;
+
+        const logger = new Logger([
+          markExtensionSlot([
+            (info) => {
+              info.message = 'This is a placeholder.';
+            },
+          ]),
+          (info) => info.message,
+          (info) => {
+            output = info[OUTPUT_SYMBOL];
+          },
+        ]);
+
+        const subLogger = logger.extend([]);
+
+        logger.info('This should be ignored.');
+        expect(output).toBe('This is a placeholder.');
+
+        subLogger.info('This should be logged.');
+        expect(output).toBe('This should be logged.');
+      });
     });
   });
 });
