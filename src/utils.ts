@@ -27,7 +27,7 @@ export function executeOperations(
 
       result = executeOperations(
         info,
-        extensions?.[operation.slotName] ?? [],
+        extensions?.[operation.slotName] ?? operation.operations,
         extensions,
       );
     }

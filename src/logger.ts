@@ -18,8 +18,6 @@ export class Logger extends LogStream {
   constructor(options?: LogOperation[] | LoggerOptions) {
     if (Array.isArray(options)) {
       super(options);
-
-      this.operations.push({ slotName: 'defaultSlot' });
     } else {
       super();
 
@@ -89,7 +87,9 @@ export class Logger extends LogStream {
     }
   }
 
-  extend(extensions: LogOperation[] | LogExtensions) {
+  extend(extensions?: LogOperation[] | LogExtensions) {
+    extensions ??= {};
+
     if (Array.isArray(extensions)) {
       extensions = { defaultSlot: extensions };
     }
