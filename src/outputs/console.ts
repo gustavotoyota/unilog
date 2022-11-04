@@ -5,6 +5,9 @@ import { ARGS_SYMBOL, LEVEL_SYMBOL, OUTPUT_SYMBOL } from '../symbols';
 
 export class ConsoleOutput extends LogStream {
   override write(info: LogInfo) {
+    // Pre-processing for Firefox
+    // (Firefox doesn't support ANSI color escapes)
+
     if (
       typeof info[OUTPUT_SYMBOL] === 'string' &&
       globalThis.navigator?.userAgent.toLowerCase().indexOf('firefox') >= 0

@@ -1,6 +1,6 @@
 import type { LogInfo } from '../info';
 
-export type LogOperationResult = LogInfo | string | false | void;
+export type LogOperationResult = LogInfo | string | boolean | void;
 export type LogOperation =
   | ((info: LogInfo) => LogOperationResult)
   | { slotName: string };

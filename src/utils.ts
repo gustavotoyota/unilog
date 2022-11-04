@@ -17,7 +17,7 @@ export function executeOperations(
     let result: LogOperationResult;
 
     if (typeof operation === 'function') {
-      result = operation.call(extensions, info);
+      result = operation.call({ extensions }, info);
     } else {
       if (checkedSlots.has(operation.slotName)) {
         continue;

@@ -2,6 +2,7 @@ import type { LogInfo } from './info';
 import type { LogLevel } from './levels';
 import { addContext } from './operations';
 import type { LogExtensions, LogOperation } from './operations/operation';
+import { LogStream } from './stream';
 import { ARGS_SYMBOL, LEVEL_SYMBOL, OUTPUT_SYMBOL } from './symbols';
 import { executeOperations } from './utils';
 
@@ -10,17 +11,18 @@ export interface LoggerOptions {
   extensions?: LogExtensions;
 }
 
-export class Logger {
-  operations?: LogOperation[];
-
+export class Logger extends LogStream {
   baseLogger?: Logger;
   extensions?: LogExtensions;
 
   constructor(options?: LogOperation[] | LoggerOptions) {
     if (Array.isArray(options)) {
-      this.operations = options;
+      super(options);
+
       this.operations.push({ slotName: 'defaultSlot' });
     } else {
+      super();
+
       this.baseLogger = options?.baseLogger;
       this.extensions = options?.extensions;
     }
@@ -68,10 +70,10 @@ export class Logger {
       Object.assign(info, args[i]);
     }
 
-    this._process(info);
+    this.write(info);
   }
 
-  private _process(info: LogInfo, extensions: LogExtensions = {}) {
+  write(info: LogInfo, extensions: LogExtensions = {}) {
     if (this.baseLogger != null) {
       for (const key in this.extensions) {
         if (key in extensions) {
@@ -81,9 +83,9 @@ export class Logger {
         }
       }
 
-      this.baseLogger._process(info, extensions);
+      this.baseLogger.write(info, extensions);
     } else {
-      executeOperations(info, this.operations ?? [], extensions);
+      executeOperations(info, this.operations, extensions);
     }
   }
 
@@ -94,7 +96,6 @@ export class Logger {
 
     return new Logger({ baseLogger: this, extensions });
   }
-
   sub(context: string) {
     return this.extend([addContext(context)]);
   }
