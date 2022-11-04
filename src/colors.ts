@@ -1,3 +1,5 @@
+import type { LogLevel } from './levels';
+
 export enum EscapeColors {
   Reset = '\x1b[0m',
   Bright = '\x1b[1m',
@@ -53,3 +55,23 @@ export const escapeColorToCSS: Record<EscapeColors, string> = {
   [EscapeColors.BgCyan]: 'background-color: cyan',
   [EscapeColors.BgWhite]: 'background-color: white',
 };
+
+export function colorizeText(text: string, color: string): string {
+  return `${color}${text}${EscapeColors.Reset}`;
+}
+
+export function colorizeTextByLogLevel(text: string, level: LogLevel) {
+  if (level === 'info') {
+    return colorizeText(text, EscapeColors.FgGreen);
+  } else if (level === 'warn') {
+    return colorizeText(text, EscapeColors.FgYellow);
+  } else if (level === 'error') {
+    return colorizeText(text, EscapeColors.FgRed);
+  } else if (level === 'debug') {
+    return colorizeText(text, EscapeColors.FgCyan);
+  } else if (level === 'verbose') {
+    return colorizeText(text, EscapeColors.FgMagenta);
+  } else {
+    return text;
+  }
+}
