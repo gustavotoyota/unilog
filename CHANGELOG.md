@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.25](https://github.com/gustavotoyota/unilogr/compare/v0.0.24...v0.0.25) (2022-11-04)
+
+
+### Bug Fixes
+
+* implement slot placeholder ([64c2014](https://github.com/gustavotoyota/unilogr/commit/64c201488e01929bd2d322474f931c4c658e6c50))
+* make Logger extend LogStream ([993c490](https://github.com/gustavotoyota/unilogr/commit/993c49089668450d602e5056de0255e45824fd97))
+
 ### [0.0.24](https://github.com/gustavotoyota/unilogr/compare/v0.0.23...v0.0.24) (2022-11-03)
 
 ### [0.0.23](https://github.com/gustavotoyota/unilogr/compare/v0.0.22...v0.0.23) (2022-11-03)
