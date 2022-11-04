@@ -8,7 +8,12 @@ module.exports = {
 
   extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
 
-  ignorePatterns: ['dist', 'node_modules', '.eslintrc.js'],
+  ignorePatterns: [
+    'dist',
+    'node_modules',
+    '.eslintrc.js',
+    'commitlint.config.js',
+  ],
 
   parserOptions: {
     ecmaVersion: 'latest',
@@ -51,7 +56,10 @@ module.exports = {
     'no-return-await': 'off',
     '@typescript-eslint/return-await': ['error', 'always'],
 
-    '@typescript-eslint/consistent-type-imports': 'off',
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      { disallowTypeAnnotations: false },
+    ],
 
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
   },

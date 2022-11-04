@@ -1,7 +1,7 @@
 import type { WriteStream } from 'fs';
 
 import type { LogInfo } from '../info';
-import { LogOperation } from '../operations';
+import type { LogOperation } from '../operations';
 import { LogStream } from '../stream';
 import { ARGS_SYMBOL } from '../symbols';
 
