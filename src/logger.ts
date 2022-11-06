@@ -27,22 +27,22 @@ export class Logger extends LogStream {
   }
 
   error(message: any, ...args: any[]) {
-    this.log('error', message, ...args);
+    return this.log('error', message, ...args);
   }
   warn(message: any, ...args: any[]) {
-    this.log('warn', message, ...args);
+    return this.log('warn', message, ...args);
   }
   info(message: any, ...args: any[]) {
-    this.log('info', message, ...args);
+    return this.log('info', message, ...args);
   }
   debug(message: any, ...args: any[]) {
-    this.log('debug', message, ...args);
+    return this.log('debug', message, ...args);
   }
   verbose(message: any, ...args: any[]) {
-    this.log('verbose', message, ...args);
+    return this.log('verbose', message, ...args);
   }
 
-  log(level: LogLevel, message: any, ...args: any[]): void {
+  log(level: LogLevel, message: any, ...args: any[]) {
     if (typeof message !== 'string') {
       args = [message, ...args];
       message = '%o';
@@ -68,7 +68,7 @@ export class Logger extends LogStream {
       Object.assign(info, args[i]);
     }
 
-    this.write(info);
+    return this.write(info);
   }
 
   write(info: LogInfo, extensions: LogExtensions = {}) {
@@ -85,6 +85,8 @@ export class Logger extends LogStream {
     } else {
       executeOperations(info, this.operations, extensions);
     }
+
+    return this;
   }
 
   extend(extensions?: LogOperation[] | LogExtensions) {
