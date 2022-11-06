@@ -2,7 +2,7 @@
 
 [![Version npm](https://img.shields.io/npm/v/unilogr.svg?logo=npm)](https://www.npmjs.com/package/unilogr)
 
-UniLogr is a logger for both Node.js and Browser based on Winston.
+UniLogr is a logger for both Node.js and Browser inspired by Winston.
 
 ## Motivation
 
@@ -161,12 +161,12 @@ subLogger.info('Sub logger test');
 // 2029-05-02 11:18:41 (Main context > Sub context): Sub logger test
 ```
 
-The utility function `logger.sub(context)` helps to easily add subcontexts:
+The utility function `logger.sub(context)` helps to easily extend loggers by adding a subcontext:
 
 ```js
-const subLogger = mainLogger.sub('Sub context');
+const authLogger = mainLogger.sub('Auth');
 // Appends the context to the field "ctx" in the info object.
-// Same as mainLogger.extend([addContext('Sub context')])
+// Same as mainLogger.extend([addContext('Auth')])
 ```
 
 You can create and extend multiple slots by giving them different names.
